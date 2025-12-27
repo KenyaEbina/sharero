@@ -19,6 +19,10 @@ const { sliderProjects } = Astro.props;
 	import gsap from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
 	import { CustomEase } from 'gsap/all';
+	import Swiper from 'swiper';
+	import { Autoplay, EffectFade } from 'swiper/modules';
+	import 'swiper/css';
+	import 'swiper/css/effect-fade';
 
 	document.addEventListener('DOMContentLoaded', () => {
 		const sliderProjects = window.sliderProjects || [];
@@ -43,11 +47,6 @@ const { sliderProjects } = Astro.props;
 		const copyrightYear = document.querySelector('.copyright-year');
 		const scrollIndicator = document.querySelector('.scroll-indicator');
 
-		// アクティブなスライドの背景を取得する関数
-		const getActiveSlideBackground = () => {
-			return document.querySelector('.slide.active .slide-background');
-		};
-		const slideBackground = getActiveSlideBackground();
 
 		if (!counterProgress || !counterContainer) return;
 
@@ -104,32 +103,8 @@ const { sliderProjects } = Astro.props;
 			);
 		}
 
-		// ヒーロー画像のクリップパスアニメーション
-		if (slideBackground) {
-			gsap.set(slideBackground, {
-				clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
-			});
-
-			tl.to(
-				slideBackground,
-				{
-					clipPath: 'polygon(35% 35%, 65% 35%, 65% 65%, 35% 65%)',
-					duration: 1.5,
-					ease: 'hop',
-				},
-				4.5
-			);
-
-			tl.to(
-				slideBackground,
-				{
-					clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-					duration: 2,
-					ease: 'hop',
-				},
-				6
-			);
-		}
+		// Swiperの初期化（ローディング完了後に実行）
+		let swiper;
 
 		// プログレスバーの内部プログレス
 		if (progress) {
@@ -205,90 +180,56 @@ const { sliderProjects } = Astro.props;
 			);
 		}
 
-		// スライド機能
-		let currentSlide = 0;
-		const totalSlides = 6;
-		const slides = document.querySelectorAll('.slide');
+		// スライドプログレスバー
+		const slideProgressBar = document.querySelector('.slide-progress-bar');
+		const slideProgress = document.querySelector('.slide-progress');
+		let progressAnimation;
 
-		function updateSlide(index) {
-			// 前のスライドを非アクティブに
-			slides.forEach((slide, i) => {
-				slide.classList.toggle('active', i === index);
-			});
-
-			// 新しいアクティブなスライドの背景を取得
-			const newSlideBackground = getActiveSlideBackground();
-
-			if (projectTitle && solutionTitle && sliderProjects[index]) {
-				projectTitle.textContent = sliderProjects[index].title;
-				solutionTitle.textContent = sliderProjects[index].service;
-
-				// テキストを再分割してアニメーション
-				const projectSplit = splitText(projectTitle, 'chars', 'char');
-				const solutionSplit = splitText(solutionTitle, 'chars', 'char');
-
-				gsap.set(projectSplit.chars, { x: '100%' });
-				gsap.to(projectSplit.chars, {
-					x: '0%',
-					duration: 0.8,
-					ease: 'power4.out',
-					stagger: 0.05,
-				});
-
-				gsap.set(solutionSplit.chars, { x: '100%' });
-				gsap.to(solutionSplit.chars, {
-					x: '0%',
-					duration: 0.8,
-					ease: 'power4.out',
-					stagger: 0.05,
+		// プログレスバーのアニメーション管理
+		function startProgressBar() {
+			if (slideProgress) {
+				gsap.set(slideProgress, { scaleX: 0 });
+				if (progressAnimation) {
+					progressAnimation.kill();
+				}
+				progressAnimation = gsap.to(slideProgress, {
+					scaleX: 1,
+					duration: 3,
+					ease: 'none',
+					onComplete: () => {
+						startProgressBar(); // ループ
+					},
 				});
 			}
+		}
 
-			// スライドのフェードインアニメーション
-			if (newSlideBackground) {
-				gsap.fromTo(
-					newSlideBackground.parentElement,
-					{ opacity: 0 },
-					{ opacity: 1, duration: 1, ease: 'power2.out' }
-				);
+		function stopProgressBar() {
+			if (progressAnimation) {
+				progressAnimation.pause();
 			}
 		}
 
-		function nextSlide() {
-			currentSlide = (currentSlide + 1) % totalSlides;
-			updateSlide(currentSlide);
-		}
-
-		// 自動スライド（ローディング完了後に開始）
-		let autoSlideInterval;
-		function startAutoSlide() {
-			autoSlideInterval = setInterval(nextSlide, 5000);
-		}
-
-		function stopAutoSlide() {
-			if (autoSlideInterval) {
-				clearInterval(autoSlideInterval);
+		function resumeProgressBar() {
+			if (progressAnimation) {
+				progressAnimation.resume();
+			} else {
+				startProgressBar();
 			}
-		}
-
-		if (heroSlider) {
-			heroSlider.addEventListener('mouseenter', stopAutoSlide);
-			heroSlider.addEventListener('mouseleave', startAutoSlide);
 		}
 
 		// ローディング完了後にclip-pathを解除して全体を表示
-		// ヒーロー画像が表示され始めるタイミング（6秒後）に合わせて解除
+		// テキストアニメーション完了後（7.5秒後）に解除
 		tl.to(
 			'main, header, footer',
 			{
 				clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-				duration: 2,
-				ease: 'hop',
+				duration: 1,
+				ease: 'power2.out',
 				onComplete: () => {
 					document.body.classList.remove('loading');
 				},
 			},
-			6
+			7.5
 		);
 
 		// プログレスバーを最後に消す（テキストアニメーション完了後）
@@ -309,10 +250,71 @@ const { sliderProjects } = Astro.props;
 			);
 		}
 
-		// ローディング完了後に自動スライドを開始
+		// ローディング完了後にSwiperを初期化して開始
 		tl.call(
 			() => {
-				startAutoSlide();
+				// Swiperの初期化
+				swiper = new Swiper('.hero-swiper', {
+					modules: [Autoplay, EffectFade],
+					loop: true,
+					autoplay: {
+						delay: 3000,
+						disableOnInteraction: false,
+					},
+					effect: 'fade',
+					fadeEffect: {
+						crossFade: true,
+					},
+					speed: 1000,
+					allowTouchMove: false,
+				});
+
+				// スライド変更時のイベント
+				swiper.on('slideChange', function () {
+					const currentIndex = swiper.realIndex;
+					if (projectTitle && solutionTitle && sliderProjects[currentIndex]) {
+						projectTitle.textContent = sliderProjects[currentIndex].title;
+						solutionTitle.textContent = sliderProjects[currentIndex].service;
+
+						// テキストを再分割してアニメーション
+						const projectSplit = splitText(projectTitle, 'chars', 'char');
+						const solutionSplit = splitText(solutionTitle, 'chars', 'char');
+
+						gsap.set(projectSplit.chars, { x: '100%' });
+						gsap.to(projectSplit.chars, {
+							x: '0%',
+							duration: 0.8,
+							ease: 'power4.out',
+							stagger: 0.05,
+						});
+
+						gsap.set(solutionSplit.chars, { x: '100%' });
+						gsap.to(solutionSplit.chars, {
+							x: '0%',
+							duration: 0.8,
+							ease: 'power4.out',
+							stagger: 0.05,
+						});
+					}
+
+					// プログレスバーをリセット
+					startProgressBar();
+				});
+
+				// プログレスバーを開始
+				startProgressBar();
+
+				// ホバー時の動作
+				if (heroSlider) {
+					heroSlider.addEventListener('mouseenter', () => {
+						swiper.autoplay.stop();
+						stopProgressBar();
+					});
+					heroSlider.addEventListener('mouseleave', () => {
+						swiper.autoplay.start();
+						startProgressBar();
+					});
+				}
 			},
 			null,
 			8

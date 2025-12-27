@@ -106,13 +106,15 @@ const sliderProjects = [
 	<Header />
 	<main>
 		<section class="hero-slider">
-			<div class="slider-wrapper">
-				{sliderImages.map((image, index) => (
-					<div class={`slide ${index === 0 ? 'active' : ''}`} data-slide-index={index}>
-						<div class="slide-background" style={`background-image: url('${image}');`}></div>
-						<div class="slide-overlay"></div>
-					</div>
-				))}
+			<div class="swiper hero-swiper">
+				<div class="swiper-wrapper">
+					{sliderImages.map((image, index) => (
+						<div class="swiper-slide">
+							<div class="slide-background" style={`background-image: url('${image}');`}></div>
+							<div class="slide-overlay"></div>
+						</div>
+					))}
+				</div>
 			</div>
 			<div class="hero-content">
 				<div class="hero-left">
@@ -127,6 +129,9 @@ const sliderProjects = [
 			<div class="hero-footer">
 				<div class="copyright-year">©2025</div>
 				<div class="scroll-indicator">SCROLL</div>
+			</div>
+			<div class="slide-progress-bar">
+				<div class="slide-progress"></div>
 			</div>
 		</section>
 

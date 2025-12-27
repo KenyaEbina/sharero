@@ -102,7 +102,7 @@ body.loading {
   background-size: 50px 50px;
   z-index: 0;
 
-  .slider-wrapper {
+  .hero-swiper {
     position: absolute;
     top: 0;
     left: 0;
@@ -111,36 +111,27 @@ body.loading {
     z-index: 1;
   }
 
-  .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .swiper-wrapper {
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+  }
 
-    &.active {
-      opacity: 1;
-    }
+  .swiper-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
 
   .slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     filter: grayscale(100%) brightness(0.7);
-    will-change: clip-path;
-  }
-
-  .slide:not(.active) .slide-background {
-    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-  }
-
-  .slide.active .slide-background {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 
   .slide-overlay {
@@ -151,6 +142,29 @@ body.loading {
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
   }
+}
+
+.slide-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.slide-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
 }
 
 .hero-content {

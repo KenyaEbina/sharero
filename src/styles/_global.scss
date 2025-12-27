@@ -1,5 +1,21 @@
 @import './variables';
 
+@font-face {
+	font-family: 'Montreal Neue';
+	src: url('/fonts/PPNeueMontreal-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Montreal Neue';
+	src: url('/fonts/PPNeueMontreal-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -23,11 +39,31 @@
 }
 
 html {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-family: 'Noto Sans JP', 'Montreal Neue', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	line-height: 1.6;
 	color: $color-text;
 	background-color: $color-bg;
 	scroll-behavior: smooth;
+}
+
+/* 日本語テキストにはNoto Sans JPを優先 */
+body,
+:lang(ja) {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* 欧文テキストにはMontreal Neueを優先 */
+:lang(en),
+[lang="en"],
+.english-text {
+	font-family: 'Montreal Neue', sans-serif;
+}
+
+/* ロゴやブランド名など、欧文フォントを明示的に使いたい要素 */
+.logo,
+.brand-name,
+.uppercase-text {
+	font-family: 'Montreal Neue', sans-serif;
 }
 
 body {

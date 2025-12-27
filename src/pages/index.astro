@@ -3,42 +3,96 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const achievements = [
+const works = [
 	{
-		year: "2024",
-		title: "大手ECサイトのリニューアルプロジェクト",
-		description: "月間アクセス数1000万を超える大手ECサイトのフルリニューアルを担当。パフォーマンスを50%向上させ、ユーザー満足度を大幅に改善しました。",
-		technologies: ["React", "Node.js", "AWS", "TypeScript"]
+		title: "Work 1",
+		area: "661㎡ / 200T",
+		completion: "2024",
+		description: "生産性を高める コミュニケーション 共創・協働の場",
+		image: "/work/work - 1.jpg"
 	},
 	{
-		year: "2023",
-		title: "金融機関向けモバイルアプリ開発",
-		description: "セキュリティを重視した金融機関向けモバイルアプリケーションを開発。App StoreとGoogle Playで4.5以上の評価を獲得しました。",
-		technologies: ["React Native", "Firebase", "TypeScript"]
+		title: "Work 2",
+		area: "1090㎡ / 330T",
+		completion: "2024",
+		description: "ブランディング・採用 共創・協働の場",
+		image: "/work/work - 2.jpg"
 	},
 	{
-		year: "2023",
-		title: "クラウド移行コンサルティング",
-		description: "中堅企業のオンプレミス環境からクラウドへの移行をサポート。コストを30%削減し、運用効率を向上させました。",
-		technologies: ["AWS", "Docker", "Kubernetes"]
+		title: "Work 3",
+		area: "429㎡ / 130T",
+		completion: "2024",
+		description: "ブランディング・採用 コミュニケーション 共創・協働の場",
+		image: "/work/work - 3.jpg"
 	},
 	{
-		year: "2022",
-		title: "AIチャットボット開発",
-		description: "自然言語処理を活用したカスタマーサポート用チャットボットを開発。問い合わせ対応時間を70%短縮しました。",
-		technologies: ["Python", "OpenAI API", "FastAPI"]
+		title: "Work 4",
+		area: "500㎡ / 150T",
+		completion: "2023",
+		description: "コミュニケーション 共創・協働の場",
+		image: "/work/work - 4.jpg"
 	},
 	{
-		year: "2022",
-		title: "リアルタイム分析ダッシュボード構築",
-		description: "大規模データをリアルタイムで可視化するダッシュボードを構築。意思決定のスピードを向上させました。",
-		technologies: ["Vue.js", "WebSocket", "PostgreSQL"]
+		title: "Work 5",
+		area: "800㎡ / 240T",
+		completion: "2023",
+		description: "生産性を高める 共創・協働の場",
+		image: "/work/work - 5.jpg"
 	},
 	{
-		year: "2021",
-		title: "スタートアップ向けMVP開発",
-		description: "複数のスタートアップ企業のMVP（Minimum Viable Product）開発を支援。迅速な市場投入を実現しました。",
-		technologies: ["Next.js", "Supabase", "TypeScript"]
+		title: "Work 6",
+		area: "350㎡ / 105T",
+		completion: "2022",
+		description: "ブランディング・採用 コミュニケーション",
+		image: "/work/work - 6.jpg"
+	}
+];
+
+const sliderImages = [
+	"/work/work - 1.jpg",
+	"/work/work - 2.jpg",
+	"/work/work - 3.jpg",
+	"/work/work - 4.jpg",
+	"/work/work - 5.jpg",
+	"/work/work - 6.jpg"
+];
+
+const sliderProjects = [
+	{
+		category: "PROJECT",
+		title: "Work 1",
+		solution: "SOLUTION",
+		service: "Web Development"
+	},
+	{
+		category: "PROJECT",
+		title: "Work 2",
+		solution: "SOLUTION",
+		service: "Mobile App"
+	},
+	{
+		category: "PROJECT",
+		title: "Work 3",
+		solution: "SOLUTION",
+		service: "Cloud Consulting"
+	},
+	{
+		category: "PROJECT",
+		title: "Work 4",
+		solution: "SOLUTION",
+		service: "UI/UX Design"
+	},
+	{
+		category: "PROJECT",
+		title: "Work 5",
+		solution: "SOLUTION",
+		service: "AI Solutions"
+	},
+	{
+		category: "PROJECT",
+		title: "Work 6",
+		solution: "SOLUTION",
+		service: "Data Analytics"
 	}
 ];
 ---
@@ -46,75 +100,94 @@ const achievements = [
 <BaseLayout title="Sharero | コーポレートサイト" description="モダンなコーポレートサイト">
 	<Header />
 	<main>
-		<section class="hero">
-			<div class="container">
-				<h1>Shareroへようこそ</h1>
-				<p class="hero-subtitle">革新的なソリューションで、お客様の成功をサポートします</p>
+		<section class="hero-slider">
+			<div class="slider-wrapper">
+				{sliderImages.map((image, index) => (
+					<div class={`slide ${index === 0 ? 'active' : ''}`} data-slide-index={index}>
+						<div class="slide-background" style={`background-image: url('${image}');`}></div>
+						<div class="slide-overlay"></div>
+					</div>
+				))}
 			</div>
-		</section>
-
-		<section id="about" class="section">
-			<div class="container">
-				<h2 class="section-title">会社概要</h2>
-				<div class="content-grid">
-					<div class="content-section">
-						<h3>会社名</h3>
-						<p>Sharero株式会社</p>
-					</div>
-					<div class="content-section">
-						<h3>設立</h3>
-						<p>2020年1月</p>
-					</div>
-					<div class="content-section">
-						<h3>所在地</h3>
-						<p>〒100-0001<br>東京都千代田区千代田1-1-1</p>
-					</div>
-					<div class="content-section">
-						<h3>代表者</h3>
-						<p>代表取締役社長 山田 太郎</p>
-					</div>
-					<div class="content-section">
-						<h3>事業内容</h3>
-						<ul>
-							<li>Webアプリケーション開発</li>
-							<li>モバイルアプリケーション開発</li>
-							<li>クラウドソリューション提供</li>
-							<li>ITコンサルティング</li>
-						</ul>
-					</div>
-					<div class="content-section">
-						<h3>従業員数</h3>
-						<p>50名（2024年現在）</p>
-					</div>
-				</div>
-				<div class="mission-vision">
-					<div class="mission-vision-card">
-						<h3>ミッション</h3>
-						<p>テクノロジーの力で、お客様のビジネスを革新し、持続可能な成長を実現します。私たちは、最新の技術と豊富な経験を活かし、お客様の成功を全力でサポートします。</p>
-					</div>
-					<div class="mission-vision-card">
-						<h3>ビジョン</h3>
-						<p>日本を代表するIT企業として、革新的なソリューションを提供し、社会に貢献することを目指しています。お客様との信頼関係を大切にし、長期的なパートナーシップを築いていきます。</p>
+			<div class="hero-content">
+				<div class="hero-left">
+					<div class="project-info">
+						<div class="project-label">PROJECT</div>
+						<div class="project-title" id="project-title">{sliderProjects[0].title}</div>
+						<div class="solution-label">SOLUTION</div>
+						<div class="solution-title" id="solution-title">{sliderProjects[0].service}</div>
 					</div>
 				</div>
 			</div>
+			<div class="hero-footer">
+				<div class="copyright-year">©2025</div>
+				<div class="scroll-indicator">SCROLL</div>
+			</div>
 		</section>
 
-		<section id="achievements" class="section achievements-section">
+		<section id="about" class="section about-section">
+			<div class="about-background"></div>
 			<div class="container">
-				<h2 class="section-title">事業実績</h2>
-				<div class="achievements-list">
-					{achievements.map((achievement) => (
-						<article class="achievement-card">
-							<div class="achievement-year">{achievement.year}</div>
-							<div class="achievement-content">
-								<h3>{achievement.title}</h3>
-								<p>{achievement.description}</p>
-								<div class="technologies">
-									{achievement.technologies.map((tech) => (
-										<span class="tech-tag">{tech}</span>
-									))}
+				<div class="company-label">COMPANY</div>
+				<div class="company-info-table">
+					<div class="info-row">
+						<div class="info-label">会社名</div>
+						<div class="info-value">株式会社ShareRo</div>
+					</div>
+					<div class="info-row">
+						<div class="info-label">設立</div>
+						<div class="info-value">2021年1月</div>
+					</div>
+					<div class="info-row">
+						<div class="info-label">資本金</div>
+						<div class="info-value">10,005,007円</div>
+					</div>
+					<div class="info-row">
+						<div class="info-label">代表者</div>
+						<div class="info-value">
+							代表取締役 | 三原 尚人
+						</div>
+					</div>
+					<div class="info-row">
+						<div class="info-label">所在地</div>
+						<div class="info-value">
+							〒102-0093<br>東京都千代田区平河町2丁目5番3号
+						</div>
+					</div>
+					<div class="info-row">
+						<div class="info-label">事業内容</div>
+						<div class="info-value">
+							<ul class="business-items">
+								<li>インターネット等のネットワークを利用した商品の売買システム及びアプリケーションサービスの設計、開発、運用、販売及び保守</li>
+								<li>情報処理、データ入力、広告入稿サービス業務及びその請負業務</li>
+								<li>情報システムの企画、設計、開発、保守、運用及び販売</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="achievements" class="section works-section">
+			<div class="works-background"></div>
+			<div class="container">
+				<div class="works-header">
+					<div class="works-label">WORKS</div>
+				</div>
+				<div class="works-grid">
+					{works.map((work) => (
+						<article class="work-card">
+							<div class="work-image-container">
+								<img src={work.image} alt={work.title} class="work-image" />
+							</div>
+							<div class="work-info">
+								<h3 class="work-title">{work.title}</h3>
+								<div class="work-meta">
+									<span class="work-area">Area {work.area}</span>
+									<span class="work-separator">/</span>
+									<span class="work-completion">Completion {work.completion}</span>
 								</div>
+								<p class="work-description">{work.description}</p>
 							</div>
 						</article>
 					))}
@@ -124,3 +197,52 @@ const achievements = [
 	</main>
 	<Footer />
 </BaseLayout>
+
+<script define:vars={{ sliderProjects }}>
+	let currentSlide = 0;
+	const totalSlides = 6;
+
+	const slides = document.querySelectorAll('.slide');
+	const projectTitle = document.getElementById('project-title');
+	const solutionTitle = document.getElementById('solution-title');
+
+	function updateSlide(index) {
+		// スライドの更新
+		slides.forEach((slide, i) => {
+			slide.classList.toggle('active', i === index);
+		});
+
+		// テキストの更新
+		if (projectTitle && solutionTitle && sliderProjects[index]) {
+			projectTitle.textContent = sliderProjects[index].title;
+			solutionTitle.textContent = sliderProjects[index].service;
+		}
+	}
+
+	function nextSlide() {
+		currentSlide = (currentSlide + 1) % totalSlides;
+		updateSlide(currentSlide);
+	}
+
+	// 自動スライド
+	let autoSlideInterval;
+	function startAutoSlide() {
+		autoSlideInterval = setInterval(nextSlide, 5000); // 5秒ごと
+	}
+
+	function stopAutoSlide() {
+		if (autoSlideInterval) {
+			clearInterval(autoSlideInterval);
+		}
+	}
+
+	// マウスがスライダー上にある時は自動スライドを停止
+	const heroSlider = document.querySelector('.hero-slider');
+	if (heroSlider) {
+		heroSlider.addEventListener('mouseenter', stopAutoSlide);
+		heroSlider.addEventListener('mouseleave', startAutoSlide);
+	}
+
+	// 初期化
+	startAutoSlide();
+</script>

@@ -1,16 +1,291 @@
-@import './variables';
+@import "./variables";
 
-footer {
-	background-color: $color-bg-light;
-	border-top: 1px solid $color-border;
-	margin-top: auto;
-	padding: $spacing-md 0;
+.main-footer {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #ffffff;
+  padding: $spacing-xl $spacing-md;
+  z-index: 100;
 }
 
 .footer-container {
-	max-width: $max-width;
-	margin: 0 auto;
-	padding: 0 $spacing-md;
-	text-align: center;
-	color: $color-text-light;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: $spacing-xl;
+  align-items: start;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer-menu-label {
+  font-family: "Montreal Neue", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: $spacing-sm;
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  li {
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: $spacing-md 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  a {
+    font-family: "Montreal Neue", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-top: auto;
+}
+
+.footer-privacy {
+  a {
+    font-family: "Montreal Neue", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.footer-copyright {
+  font-family: "Montreal Neue", sans-serif;
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-map {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  a {
+    font-family: "Montreal Neue", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.footer-address {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.footer-action-card {
+  background-color: #f5f5f0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.action-label {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.action-title {
+  font-family: "Montreal Neue", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.action-arrow {
+  display: inline-flex;
+  align-items: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.action-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #000000;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .main-footer {
+    padding: $spacing-md 24px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+
+  .footer-left {
+    gap: 0;
+  }
+
+  .footer-menu-label {
+    font-size: 0.688rem;
+    margin-bottom: $spacing-xs;
+  }
+
+  .footer-nav-list {
+    li {
+      padding: $spacing-sm 0;
+    }
+
+    a {
+      font-size: 1.125rem;
+      line-height: 1.4;
+    }
+  }
+
+  .footer-bottom {
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+
+  .footer-privacy a {
+    font-size: 0.688rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.563rem;
+  }
+
+  .footer-map {
+    a {
+      font-size: 0.688rem;
+    }
+  }
+
+  .footer-address {
+    font-size: 0.688rem;
+    line-height: 1.5;
+  }
+
+  .footer-right {
+    order: -1;
+    gap: $spacing-sm;
+  }
+
+  .footer-action-card {
+    padding: $spacing-md;
+  }
+
+  .action-label {
+    font-size: 0.688rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .action-title {
+    font-size: 1.125rem;
+  }
+
+  .action-arrow svg,
+  .action-dot {
+    width: 14px;
+    height: 14px;
+  }
 }

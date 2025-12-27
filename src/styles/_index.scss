@@ -119,7 +119,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: $spacing-md $spacing-xl;
+  padding: 32px;
   color: white;
   font-size: 0.875rem;
   letter-spacing: 0.1em;
@@ -176,8 +176,8 @@ main {
   z-index: 1;
   margin-top: 100vh;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(80px);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   color: #ffffff;
 
   .about-background {
@@ -550,7 +550,7 @@ main {
   }
 
   .hero-footer {
-    padding: $spacing-sm 24px;
+    padding: 24px;
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;

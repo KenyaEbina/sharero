@@ -1,0 +1,85 @@
+---
+---
+
+<div class="work-modal-overlay" id="work-modal">
+	<div class="work-modal-content">
+		<button class="work-modal-close" aria-label="閉じる">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M18 6L6 18M6 6l12 12" />
+			</svg>
+		</button>
+		<div class="work-modal-image-container" id="work-modal-image">
+			<!-- 画像はJavaScriptで動的に設定 -->
+		</div>
+		<div class="work-modal-body">
+			<div class="work-modal-header">
+				<h2 class="work-modal-title" id="work-modal-title"></h2>
+				<div class="work-modal-meta" id="work-modal-meta">
+					<!-- メタ情報はJavaScriptで動的に設定 -->
+				</div>
+			</div>
+			<div class="work-modal-description">
+				<p class="work-modal-text" id="work-modal-description"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const modal = document.getElementById('work-modal');
+	const closeButton = document.querySelector('.work-modal-close');
+	const modalImageContainer = document.getElementById('work-modal-image');
+	const modalTitle = document.getElementById('work-modal-title');
+	const modalMeta = document.getElementById('work-modal-meta');
+	const modalDescription = document.getElementById('work-modal-description');
+
+	function openWorkModal(work) {
+		if (!modal || !work) return;
+
+		// モーダルにデータを設定
+		if (modalImageContainer) {
+			modalImageContainer.innerHTML = `<img src="${work.image}" alt="${work.title}" class="work-modal-image" />`;
+		}
+		if (modalTitle) {
+			modalTitle.textContent = work.title;
+		}
+		if (modalMeta) {
+			modalMeta.innerHTML = `
+				<span class="work-modal-area">Area ${work.area}</span>
+				<span class="work-modal-separator">/</span>
+				<span class="work-modal-completion">Completion ${work.completion}</span>
+			`;
+		}
+		if (modalDescription) {
+			modalDescription.textContent = work.description;
+		}
+
+		// モーダルを表示
+		modal.classList.add('active');
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeWorkModal() {
+		if (modal) {
+			modal.classList.remove('active');
+			document.body.style.overflow = '';
+		}
+	}
+
+	// 閉じるボタンのイベント
+	if (closeButton) {
+		closeButton.addEventListener('click', closeWorkModal);
+	}
+
+	// 背景クリックで閉じる
+	if (modal) {
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal) {
+				closeWorkModal();
+			}
+		});
+	}
+
+	// グローバル関数として公開
+	window.openWorkModal = openWorkModal;
+</script>

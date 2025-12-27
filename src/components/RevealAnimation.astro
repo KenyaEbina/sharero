@@ -38,11 +38,16 @@ const { sliderProjects } = Astro.props;
 		const progressBar = document.querySelector('.preloader-progress-bar');
 		const progress = document.querySelector('.preloader-progress');
 		const heroSlider = document.querySelector('.hero-slider');
-		const slideBackground = document.querySelector('.slide.active .slide-background');
 		const projectTitle = document.getElementById('project-title');
 		const solutionTitle = document.getElementById('solution-title');
 		const copyrightYear = document.querySelector('.copyright-year');
 		const scrollIndicator = document.querySelector('.scroll-indicator');
+
+		// アクティブなスライドの背景を取得する関数
+		const getActiveSlideBackground = () => {
+			return document.querySelector('.slide.active .slide-background');
+		};
+		const slideBackground = getActiveSlideBackground();
 
 		if (!counterProgress || !counterContainer) return;
 
@@ -206,9 +211,13 @@ const { sliderProjects } = Astro.props;
 		const slides = document.querySelectorAll('.slide');
 
 		function updateSlide(index) {
+			// 前のスライドを非アクティブに
 			slides.forEach((slide, i) => {
 				slide.classList.toggle('active', i === index);
 			});
+
+			// 新しいアクティブなスライドの背景を取得
+			const newSlideBackground = getActiveSlideBackground();
 
 			if (projectTitle && solutionTitle && sliderProjects[index]) {
 				projectTitle.textContent = sliderProjects[index].title;
@@ -233,6 +242,15 @@ const { sliderProjects } = Astro.props;
 					ease: 'power4.out',
 					stagger: 0.05,
 				});
+			}
+
+			// スライドのフェードインアニメーション
+			if (newSlideBackground) {
+				gsap.fromTo(
+					newSlideBackground.parentElement,
+					{ opacity: 0 },
+					{ opacity: 1, duration: 1, ease: 'power2.out' }
+				);
 			}
 		}
 
@@ -292,6 +310,12 @@ const { sliderProjects } = Astro.props;
 		}
 
 		// ローディング完了後に自動スライドを開始
-		tl.call(startAutoSlide, null, 8);
+		tl.call(
+			() => {
+				startAutoSlide();
+			},
+			null,
+			8
+		);
 	});
 </script>

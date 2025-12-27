@@ -1,0 +1,65 @@
+---
+---
+
+<div class="modal-overlay" id="representative-modal">
+	<div class="modal-content">
+		<button class="modal-close" aria-label="閉じる">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M18 6L6 18M6 6l12 12" />
+			</svg>
+		</button>
+		<div class="modal-header">
+			<h2 class="modal-title">代表取締役 | 三原 尚人</h2>
+		</div>
+		<div class="modal-body">
+			<p class="modal-text">
+				東京外国語大学（英語科）卒業後、Sansan、Gaiax、ネットプロテクションズといった、各領域で市場を切り拓く事業開発企業に在籍。一貫して新規事業の立案からプロダクト設計、そしてグロースフェーズまで、事業が形になり成長する全プロセスに深く携わってきました。
+			</p>
+			<p class="modal-text">
+				現在はその経験を活かし、株式会社Phone Appliをはじめとする企業にて、新規事業 (ソフトウェア) の企画・設計のスペシャリストとして参画しています。正社員として、株式会社ネットプロテクションズの海外事業部、事業企画責任者としても在籍しています。
+			</p>
+			<div class="modal-link">
+				<a href="https://www.linkedin.com/in/naoto-mihara/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+					</svg>
+					LinkedIn プロフィール
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const modal = document.getElementById('representative-modal');
+	const openButton = document.querySelector('.representative-link');
+	const closeButton = document.querySelector('.modal-close');
+
+	if (openButton) {
+		openButton.addEventListener('click', (e) => {
+			e.preventDefault();
+			if (modal) {
+				modal.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+		});
+	}
+
+	if (closeButton) {
+		closeButton.addEventListener('click', () => {
+			if (modal) {
+				modal.classList.remove('active');
+				document.body.style.overflow = '';
+			}
+		});
+	}
+
+	if (modal) {
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal) {
+				modal.classList.remove('active');
+				document.body.style.overflow = '';
+			}
+		});
+	}
+</script>

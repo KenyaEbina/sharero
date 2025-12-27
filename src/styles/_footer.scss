@@ -46,7 +46,7 @@
   li {
     margin: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding: $spacing-md 0;
+    padding: 16px 0;
 
     &:last-child {
       border-bottom: none;
@@ -215,7 +215,7 @@
 
   .footer-nav-list {
     li {
-      padding: $spacing-sm 0;
+      padding: 12px 0;
     }
 
     a {

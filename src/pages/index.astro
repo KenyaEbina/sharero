@@ -4,6 +4,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Preloader from "../components/Preloader.astro";
 import RevealAnimation from "../components/RevealAnimation.astro";
+import RepresentativeModal from "../components/RepresentativeModal.astro";
+import WorkModal from "../components/WorkModal.astro";
 
 const works = [
 	{
@@ -148,7 +150,12 @@ const sliderProjects = [
 					<div class="info-row">
 						<div class="info-label">代表者</div>
 						<div class="info-value">
-							代表取締役 | 三原 尚人
+							<a href="#" class="representative-link">
+								代表取締役 | 三原 尚人
+								<svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+									<path d="M6 4l4 4-4 4"/>
+								</svg>
+							</a>
 						</div>
 					</div>
 					<div class="info-row">
@@ -178,8 +185,8 @@ const sliderProjects = [
 					<div class="works-label">WORKS</div>
 				</div>
 				<div class="works-grid">
-					{works.map((work) => (
-						<article class="work-card">
+					{works.map((work, index) => (
+						<article class="work-card" data-work-index={index}>
 							<div class="work-image-container">
 								<img src={work.image} alt={work.title} class="work-image" />
 							</div>
@@ -199,5 +206,24 @@ const sliderProjects = [
 		</section>
 	</main>
 	<Footer />
+	<RepresentativeModal />
+	<WorkModal />
 	<RevealAnimation sliderProjects={sliderProjects} />
+
+	<script define:vars={{ works }}>
+		// Workカードのクリックイベントを設定
+		document.addEventListener('DOMContentLoaded', () => {
+			const workCards = document.querySelectorAll('.work-card');
+			const worksData = works;
+
+			workCards.forEach((card, index) => {
+				card.addEventListener('click', () => {
+					if (window.openWorkModal && worksData[index]) {
+						window.openWorkModal(worksData[index]);
+					}
+				});
+				card.style.cursor = 'pointer';
+			});
+		});
+	</script>
 </BaseLayout>

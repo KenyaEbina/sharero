@@ -1,0 +1,210 @@
+@import './variables';
+
+main {
+	flex: 1;
+}
+
+.hero {
+	background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+	color: white;
+	padding: $spacing-xl $spacing-md;
+	text-align: center;
+
+	h1 {
+		font-size: 3rem;
+		margin-bottom: $spacing-sm;
+		font-weight: 700;
+	}
+}
+
+.container {
+	max-width: $max-width;
+	margin: 0 auto;
+	padding: 0 $spacing-md;
+}
+
+.hero-subtitle {
+	font-size: 1.25rem;
+	opacity: 0.95;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.section {
+	padding: $spacing-xl $spacing-md;
+
+	&:nth-child(even) {
+		background-color: $color-bg-light;
+	}
+}
+
+.section-title {
+	font-size: 2.5rem;
+	margin-bottom: $spacing-lg;
+	color: $color-primary;
+	text-align: center;
+	font-weight: 700;
+}
+
+.content-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: $spacing-md;
+	margin-bottom: $spacing-lg;
+}
+
+.content-section {
+	background-color: $color-bg;
+	padding: $spacing-md;
+	border-radius: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+	h3 {
+		font-size: 1.25rem;
+		margin-bottom: $spacing-sm;
+		color: $color-primary;
+		border-bottom: 2px solid $color-primary;
+		padding-bottom: $spacing-xs;
+	}
+
+	p {
+		color: $color-text;
+		line-height: 1.8;
+		margin-top: $spacing-sm;
+	}
+
+	ul {
+		margin-top: $spacing-sm;
+		margin-left: $spacing-md;
+		color: $color-text;
+		line-height: 2;
+	}
+
+	li {
+		margin-bottom: $spacing-xs;
+	}
+}
+
+.mission-vision {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: $spacing-md;
+	margin-top: $spacing-lg;
+}
+
+.mission-vision-card {
+	background-color: $color-bg;
+	padding: $spacing-md;
+	border-radius: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	border-left: 4px solid $color-primary;
+
+	h3 {
+		font-size: 1.5rem;
+		margin-bottom: $spacing-sm;
+		color: $color-primary;
+	}
+
+	p {
+		color: $color-text;
+		line-height: 1.8;
+	}
+}
+
+.achievements-list {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-md;
+}
+
+.achievement-card {
+	background-color: $color-bg;
+	padding: $spacing-md;
+	border-radius: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	display: flex;
+	gap: $spacing-md;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	border-left: 4px solid $color-primary;
+
+	&:hover {
+		transform: translateX(4px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+}
+
+.achievement-year {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: $color-primary;
+	min-width: 80px;
+	text-align: center;
+	display: flex;
+	align-items: flex-start;
+	padding-top: $spacing-xs;
+}
+
+.achievement-content {
+	flex: 1;
+
+	h3 {
+		font-size: 1.5rem;
+		margin-bottom: $spacing-sm;
+		color: $color-text;
+	}
+
+	p {
+		color: $color-text-light;
+		line-height: 1.8;
+		margin-bottom: $spacing-sm;
+	}
+}
+
+.technologies {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacing-xs;
+	margin-top: $spacing-sm;
+}
+
+.tech-tag {
+	background-color: $color-bg-light;
+	color: $color-primary;
+	padding: 0.25rem 0.75rem;
+	border-radius: 1rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	border: 1px solid $color-primary;
+}
+
+@media (max-width: $breakpoint-mobile) {
+	.hero h1 {
+		font-size: 2rem;
+	}
+
+	.hero-subtitle {
+		font-size: 1rem;
+	}
+
+	.section-title {
+		font-size: 2rem;
+	}
+
+	.content-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.mission-vision {
+		grid-template-columns: 1fr;
+	}
+
+	.achievement-card {
+		flex-direction: column;
+		gap: $spacing-sm;
+	}
+
+	.achievement-year {
+		min-width: auto;
+		text-align: left;
+	}
+}

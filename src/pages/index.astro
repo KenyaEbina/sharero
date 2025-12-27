@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const achievements = [
+	{
+		year: "2024",
+		title: "大手ECサイトのリニューアルプロジェクト",
+		description: "月間アクセス数1000万を超える大手ECサイトのフルリニューアルを担当。パフォーマンスを50%向上させ、ユーザー満足度を大幅に改善しました。",
+		technologies: ["React", "Node.js", "AWS", "TypeScript"]
+	},
+	{
+		year: "2023",
+		title: "金融機関向けモバイルアプリ開発",
+		description: "セキュリティを重視した金融機関向けモバイルアプリケーションを開発。App StoreとGoogle Playで4.5以上の評価を獲得しました。",
+		technologies: ["React Native", "Firebase", "TypeScript"]
+	},
+	{
+		year: "2023",
+		title: "クラウド移行コンサルティング",
+		description: "中堅企業のオンプレミス環境からクラウドへの移行をサポート。コストを30%削減し、運用効率を向上させました。",
+		technologies: ["AWS", "Docker", "Kubernetes"]
+	},
+	{
+		year: "2022",
+		title: "AIチャットボット開発",
+		description: "自然言語処理を活用したカスタマーサポート用チャットボットを開発。問い合わせ対応時間を70%短縮しました。",
+		technologies: ["Python", "OpenAI API", "FastAPI"]
+	},
+	{
+		year: "2022",
+		title: "リアルタイム分析ダッシュボード構築",
+		description: "大規模データをリアルタイムで可視化するダッシュボードを構築。意思決定のスピードを向上させました。",
+		technologies: ["Vue.js", "WebSocket", "PostgreSQL"]
+	},
+	{
+		year: "2021",
+		title: "スタートアップ向けMVP開発",
+		description: "複数のスタートアップ企業のMVP（Minimum Viable Product）開発を支援。迅速な市場投入を実現しました。",
+		technologies: ["Next.js", "Supabase", "TypeScript"]
+	}
+];
+---
+
+<BaseLayout title="Sharero | コーポレートサイト" description="モダンなコーポレートサイト">
+	<Header />
+	<main>
+		<section class="hero">
+			<div class="container">
+				<h1>Shareroへようこそ</h1>
+				<p class="hero-subtitle">革新的なソリューションで、お客様の成功をサポートします</p>
+			</div>
+		</section>
+
+		<section id="about" class="section">
+			<div class="container">
+				<h2 class="section-title">会社概要</h2>
+				<div class="content-grid">
+					<div class="content-section">
+						<h3>会社名</h3>
+						<p>Sharero株式会社</p>
+					</div>
+					<div class="content-section">
+						<h3>設立</h3>
+						<p>2020年1月</p>
+					</div>
+					<div class="content-section">
+						<h3>所在地</h3>
+						<p>〒100-0001<br>東京都千代田区千代田1-1-1</p>
+					</div>
+					<div class="content-section">
+						<h3>代表者</h3>
+						<p>代表取締役社長 山田 太郎</p>
+					</div>
+					<div class="content-section">
+						<h3>事業内容</h3>
+						<ul>
+							<li>Webアプリケーション開発</li>
+							<li>モバイルアプリケーション開発</li>
+							<li>クラウドソリューション提供</li>
+							<li>ITコンサルティング</li>
+						</ul>
+					</div>
+					<div class="content-section">
+						<h3>従業員数</h3>
+						<p>50名（2024年現在）</p>
+					</div>
+				</div>
+				<div class="mission-vision">
+					<div class="mission-vision-card">
+						<h3>ミッション</h3>
+						<p>テクノロジーの力で、お客様のビジネスを革新し、持続可能な成長を実現します。私たちは、最新の技術と豊富な経験を活かし、お客様の成功を全力でサポートします。</p>
+					</div>
+					<div class="mission-vision-card">
+						<h3>ビジョン</h3>
+						<p>日本を代表するIT企業として、革新的なソリューションを提供し、社会に貢献することを目指しています。お客様との信頼関係を大切にし、長期的なパートナーシップを築いていきます。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="achievements" class="section achievements-section">
+			<div class="container">
+				<h2 class="section-title">事業実績</h2>
+				<div class="achievements-list">
+					{achievements.map((achievement) => (
+						<article class="achievement-card">
+							<div class="achievement-year">{achievement.year}</div>
+							<div class="achievement-content">
+								<h3>{achievement.title}</h3>
+								<p>{achievement.description}</p>
+								<div class="technologies">
+									{achievement.technologies.map((tech) => (
+										<span class="tech-tag">{tech}</span>
+									))}
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>

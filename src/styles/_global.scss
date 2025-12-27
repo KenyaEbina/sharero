@@ -1,0 +1,52 @@
+@import './variables';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--color-primary: #{$color-primary};
+	--color-primary-dark: #{$color-primary-dark};
+	--color-text: #{$color-text};
+	--color-text-light: #{$color-text-light};
+	--color-bg: #{$color-bg};
+	--color-bg-light: #{$color-bg-light};
+	--color-border: #{$color-border};
+	--max-width: #{$max-width};
+	--spacing-xs: #{$spacing-xs};
+	--spacing-sm: #{$spacing-sm};
+	--spacing-md: #{$spacing-md};
+	--spacing-lg: #{$spacing-lg};
+	--spacing-xl: #{$spacing-xl};
+}
+
+html {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	line-height: 1.6;
+	color: $color-text;
+	background-color: $color-bg;
+	scroll-behavior: smooth;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	color: $color-primary;
+	text-decoration: none;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: $color-primary-dark;
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}

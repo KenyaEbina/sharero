@@ -176,6 +176,8 @@ main {
   z-index: 1;
   margin-top: 100vh;
   background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
   color: #ffffff;
 
   .about-background {
@@ -390,8 +392,8 @@ main {
   padding: $spacing-xl $spacing-md;
   z-index: 1;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
   color: #ffffff;
 
   .works-background {
@@ -549,9 +551,13 @@ main {
 
   .hero-footer {
     padding: $spacing-sm 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $spacing-xs;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .copyright-year {
+    display: none;
   }
 
   .copyright-year {

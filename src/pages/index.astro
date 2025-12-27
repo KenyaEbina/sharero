@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Preloader from "../components/Preloader.astro";
+import RevealAnimation from "../components/RevealAnimation.astro";
 
 const works = [
 	{
@@ -98,6 +100,7 @@ const sliderProjects = [
 ---
 
 <BaseLayout title="Sharero | コーポレートサイト" description="モダンなコーポレートサイト">
+	<Preloader />
 	<Header />
 	<main>
 		<section class="hero-slider">
@@ -196,53 +199,5 @@ const sliderProjects = [
 		</section>
 	</main>
 	<Footer />
+	<RevealAnimation sliderProjects={sliderProjects} />
 </BaseLayout>
-
-<script define:vars={{ sliderProjects }}>
-	let currentSlide = 0;
-	const totalSlides = 6;
-
-	const slides = document.querySelectorAll('.slide');
-	const projectTitle = document.getElementById('project-title');
-	const solutionTitle = document.getElementById('solution-title');
-
-	function updateSlide(index) {
-		// スライドの更新
-		slides.forEach((slide, i) => {
-			slide.classList.toggle('active', i === index);
-		});
-
-		// テキストの更新
-		if (projectTitle && solutionTitle && sliderProjects[index]) {
-			projectTitle.textContent = sliderProjects[index].title;
-			solutionTitle.textContent = sliderProjects[index].service;
-		}
-	}
-
-	function nextSlide() {
-		currentSlide = (currentSlide + 1) % totalSlides;
-		updateSlide(currentSlide);
-	}
-
-	// 自動スライド
-	let autoSlideInterval;
-	function startAutoSlide() {
-		autoSlideInterval = setInterval(nextSlide, 5000); // 5秒ごと
-	}
-
-	function stopAutoSlide() {
-		if (autoSlideInterval) {
-			clearInterval(autoSlideInterval);
-		}
-	}
-
-	// マウスがスライダー上にある時は自動スライドを停止
-	const heroSlider = document.querySelector('.hero-slider');
-	if (heroSlider) {
-		heroSlider.addEventListener('mouseenter', stopAutoSlide);
-		heroSlider.addEventListener('mouseleave', startAutoSlide);
-	}
-
-	// 初期化
-	startAutoSlide();
-</script>

@@ -1,0 +1,262 @@
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import { CustomEase } from 'gsap/all';
+
+interface SliderProject {
+	category: string;
+	title: string;
+	solution: string;
+	service: string;
+}
+
+declare global {
+	interface Window {
+		sliderProjects: SliderProject[];
+	}
+}
+
+export function initRevealAnimation() {
+	const sliderProjects = window.sliderProjects || [];
+	document.addEventListener('DOMContentLoaded', () => {
+		gsap.registerPlugin(CustomEase, SplitText);
+		CustomEase.create('hop', '0.9, 0, 0.1, 1');
+
+		const splitText = (selector: string | Element, type: string, className: string) => {
+			return SplitText.create(selector, {
+				type: type,
+				[`${type}Class`]: className,
+				mask: type,
+			});
+		};
+
+		const counterProgress = document.querySelector('.preloader-counter h1');
+		const counterContainer = document.querySelector('.preloader-counter');
+		const progressBar = document.querySelector('.preloader-progress-bar');
+		const progress = document.querySelector('.preloader-progress');
+		const heroSlider = document.querySelector('.hero-slider');
+		const slideBackground = document.querySelector('.slide.active .slide-background');
+		const projectTitle = document.getElementById('project-title');
+		const solutionTitle = document.getElementById('solution-title');
+		const copyrightYear = document.querySelector('.copyright-year');
+		const scrollIndicator = document.querySelector('.scroll-indicator');
+
+		if (!counterProgress || !counterContainer) return;
+
+		const counter = { value: 0 };
+		const tl = gsap.timeline();
+
+		// カウンターアニメーション
+		tl.to(counter, {
+			value: 100,
+			duration: 3,
+			ease: 'power3.out',
+			onUpdate: () => {
+				if (counterProgress) {
+					counterProgress.textContent = Math.floor(counter.value).toString();
+				}
+			},
+			onComplete: () => {
+				const counterSplit = splitText(counterProgress, 'chars', 'digit');
+				gsap.to(counterSplit.chars, {
+					x: '-100%',
+					duration: 0.75,
+					ease: 'power3.out',
+					stagger: 0.1,
+					delay: 1,
+					onComplete: () => {
+						if (counterContainer) {
+							counterContainer.remove();
+						}
+					},
+				});
+			},
+		});
+
+		// カウンターのスケール
+		tl.to(
+			counterContainer,
+			{
+				scale: 1,
+				duration: 3,
+				ease: 'power3.out',
+			},
+			'<'
+		);
+
+		// プログレスバーのアニメーション
+		if (progressBar) {
+			tl.to(
+				progressBar,
+				{
+					scaleX: 1,
+					duration: 3,
+					ease: 'power3.out',
+				},
+				'<'
+			);
+		}
+
+		// ヒーロー画像のクリップパスアニメーション
+		if (slideBackground) {
+			// 最初は中央の小さな四角形から開始
+			gsap.set(slideBackground, {
+				clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
+			});
+
+			tl.to(
+				slideBackground,
+				{
+					clipPath: 'polygon(35% 35%, 65% 35%, 65% 65%, 35% 65%)',
+					duration: 1.5,
+					ease: 'hop',
+				},
+				4.5
+			);
+
+			tl.to(
+				slideBackground,
+				{
+					clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					duration: 2,
+					ease: 'hop',
+				},
+				6
+			);
+		}
+
+		// プログレスバーの内部プログレス
+		if (progress) {
+			tl.to(
+				progress,
+				{
+					scaleX: 1,
+					duration: 2,
+					ease: 'hop',
+				},
+				6
+			);
+		}
+
+		// テキストアニメーション
+		if (projectTitle) {
+			const projectSplit = splitText(projectTitle, 'chars', 'char');
+			gsap.set(projectSplit.chars, { x: '100%' });
+			tl.to(
+				projectSplit.chars,
+				{
+					x: '0%',
+					duration: 1,
+					ease: 'power4.out',
+					stagger: 0.075,
+				},
+				7
+			);
+		}
+
+		if (solutionTitle) {
+			const solutionSplit = splitText(solutionTitle, 'chars', 'char');
+			gsap.set(solutionSplit.chars, { x: '100%' });
+			tl.to(
+				solutionSplit.chars,
+				{
+					x: '0%',
+					duration: 1,
+					ease: 'power4.out',
+					stagger: 0.075,
+				},
+				7.5
+			);
+		}
+
+		if (copyrightYear) {
+			const copyrightSplit = splitText(copyrightYear, 'chars', 'char');
+			gsap.set(copyrightSplit.chars, { y: '100%' });
+			tl.to(
+				copyrightSplit.chars,
+				{
+					y: '0%',
+					duration: 1,
+					ease: 'power4.out',
+					stagger: 0.075,
+				},
+				7.5
+			);
+		}
+
+		if (scrollIndicator) {
+			const scrollSplit = splitText(scrollIndicator, 'words', 'word');
+			gsap.set(scrollSplit.words, { y: '100%' });
+			tl.to(
+				scrollSplit.words,
+				{
+					y: '0%',
+					duration: 1,
+					ease: 'power4.out',
+					stagger: 0.075,
+				},
+				7.5
+			);
+		}
+
+		// スライド機能
+		let currentSlide = 0;
+		const totalSlides = 6;
+		const slides = document.querySelectorAll('.slide');
+
+		function updateSlide(index: number) {
+			slides.forEach((slide, i) => {
+				slide.classList.toggle('active', i === index);
+			});
+
+			if (projectTitle && solutionTitle && sliderProjects[index]) {
+				projectTitle.textContent = sliderProjects[index].title;
+				solutionTitle.textContent = sliderProjects[index].service;
+
+				// テキストを再分割してアニメーション
+				const projectSplit = splitText(projectTitle, 'chars', 'char');
+				const solutionSplit = splitText(solutionTitle, 'chars', 'char');
+
+				gsap.set(projectSplit.chars, { x: '100%' });
+				gsap.to(projectSplit.chars, {
+					x: '0%',
+					duration: 0.8,
+					ease: 'power4.out',
+					stagger: 0.05,
+				});
+
+				gsap.set(solutionSplit.chars, { x: '100%' });
+				gsap.to(solutionSplit.chars, {
+					x: '0%',
+					duration: 0.8,
+					ease: 'power4.out',
+					stagger: 0.05,
+				});
+			}
+		}
+
+		function nextSlide() {
+			currentSlide = (currentSlide + 1) % totalSlides;
+			updateSlide(currentSlide);
+		}
+
+		// 自動スライド（ローディング完了後に開始）
+		let autoSlideInterval: NodeJS.Timeout;
+		function startAutoSlide() {
+			autoSlideInterval = setInterval(nextSlide, 5000);
+		}
+
+		function stopAutoSlide() {
+			if (autoSlideInterval) {
+				clearInterval(autoSlideInterval);
+			}
+		}
+
+		if (heroSlider) {
+			heroSlider.addEventListener('mouseenter', stopAutoSlide);
+			heroSlider.addEventListener('mouseleave', startAutoSlide);
+		}
+
+		// ローディング完了後に自動スライドを開始
+		tl.call(startAutoSlide, null, 8);
+	});
+}

@@ -10,10 +10,10 @@ import WorkModal from "../components/WorkModal.astro";
 const worksData = [
 	{
 		title: "Manejas",
-		client: "PHONE APPLI",
+		client: "PHONE APPLI (NTTコミュニケーショングループ)",
 		area: "BizDev / UX UI Design / PDM",
 		lead: "マネジメントの「見えない課題」を解消するピープルマネジメントシステム「Manejas」の企画・デザイン・開発を担当",
-		description: "詳細な説明文をここに記載します。プロジェクトの背景、取り組み、成果などを詳しく説明します。",
+		description: "現代のマネージャーが抱える「管理職の罰ゲーム化」と揶揄される現代マネージャーの過度な負担を軽減するための、サーベイ型マネジメントサポートツールの新規事業立ち上げに参画。市場調査を含めた事業企画から課題の特定、システム要件定義を担当しています。単なるデータの可視化にとどまらず、AIを活用して「次に何をすべきか」という具体的なアクションプランまで提示することで、人事・マネージャー・メンバーが支え合える自律型組織の構築を支援するプラットフォームです。",
 		image: "/work/work - 1.jpg"
 	},
 	{
@@ -72,8 +72,11 @@ const works = worksData.map(({ title, client, area, image }) => ({
 	<Header />
 	<main>
 		<section class="hero-video">
-			<video class="hero-video-element" autoplay muted loop playsinline poster="/poster.jpg">
+			<video class="hero-video-element hero-video-pc" autoplay muted loop playsinline poster="/poster.jpg">
 				<source src="/FV.mp4" type="video/mp4" />
+			</video>
+			<video class="hero-video-element hero-video-sp" autoplay muted loop playsinline poster="/poster.jpg">
+				<source src="/FV_SP.mp4" type="video/mp4" />
 			</video>
 			<div class="video-overlay"></div>
 			<div class="hero-content">

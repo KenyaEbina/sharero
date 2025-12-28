@@ -9,73 +9,60 @@ import WorkModal from "../components/WorkModal.astro";
 // Workデータを一箇所にまとめて管理
 const worksData = [
 	{
-		title: "Work 1",
-		area: "661㎡ / 200T",
-		completion: "2024",
-		description: "生産性を高める コミュニケーション 共創・協働の場",
-		image: "/work/work - 1.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "Web Development"
+		title: "Manejas",
+		client: "PHONE APPLI",
+		area: "BizDev / UX UI Design / PDM",
+		lead: "マネジメントの「見えない課題」を解消するピープルマネジメントシステム「Manejas」の企画・デザイン・開発を担当",
+		description: "詳細な説明文をここに記載します。プロジェクトの背景、取り組み、成果などを詳しく説明します。",
+		image: "/work/work - 1.jpg"
 	},
 	{
-		title: "Work 2",
-		area: "1090㎡ / 330T",
-		completion: "2024",
-		description: "ブランディング・採用 共創・協働の場",
-		image: "/work/work - 2.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "Mobile App"
+		title: "Shiftly",
+		client: "自社サービス(準備中)",
+		area: "サービス設計・UIデザイン・ロゴ制作・アプリデザイン",
+		lead: "南アフリカ ギグワークプラットフォーム",
+		description: "南アフリカの労働市場における失業課題を解決するため、 面接なし・即日払いを実現する「日本版タイミー」のようなプラットフォーム開発が求められていました。 現地のモバイル利用実態に合わせて体験を再設計し、要件定義からVI〜UIまでを一貫してデザインし、 信頼性と使いやすさを両立した、社会インフラとなるサービスに仕上げています。",
+		image: "/work/work - 2.jpg"
 	},
 	{
-		title: "Work 3",
-		area: "429㎡ / 130T",
-		completion: "2024",
-		description: "ブランディング・採用 コミュニケーション 共創・協働の場",
-		image: "/work/work - 3.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "Cloud Consulting"
+		title: "SHIBUYA MABLs",
+		client: "東急不動産",
+		area: "ブランドイメージ・UX・UIデザイン・ロゴ制作・Webサイト制作",
+		lead: "渋谷のワーカーが会社を超えてつながり、世界中が熱狂するイノベーティブな街をDXで実現",
+		description: "100年に1度の規模で、渋谷の都市開発を東急不動産様が担うことになり、そのプロジェクトの一環として、顧客接点を持てるビジネスの創出を望まれていました｡コミュニティアプリへと体験を再設計し、要件定義からVI~UIまでデザインし、サービスクオリティの高いものに仕上がりました｡",
+		image: "/work/work - 3.jpg"
 	},
 	{
-		title: "Work 4",
-		area: "500㎡ / 150T",
-		completion: "2023",
-		description: "コミュニケーション 共創・協働の場",
-		image: "/work/work - 4.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "UI/UX Design"
+		title: "TENTIAL EC Site",
+		client: "TENTIAL",
+		area: "UX UI Design / Web Design / Development",
+		lead: "BAKUNEブランドのECリニューアル",
+		description: "ブランドリニューアル後のECサイトの数値改善を担当しております｡初期はファネルの詰まりを改善するためのデザイン改善案にはじまり、現在はCVを改善するための効果的な施策を提案しています。嵐の桜井翔さんを起用したCMに合わせた、インタラクションがあるストーリー性の高い特設サイトのデザイン・コーディングも担当しております。",
+		image: "/work/work - 4.jpg"
 	},
 	{
-		title: "Work 5",
-		area: "800㎡ / 240T",
-		completion: "2023",
-		description: "生産性を高める 共創・協働の場",
-		image: "/work/work - 5.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "AI Solutions"
+		title: "Domohorn Wrinkle | グローバルECサイトのリブランディング",
+		client: "再春館製薬所",
+		area: "Branding / UX UI Design / Web Design / Development",
+		lead: "グローバル展開に向けたブランド強化",
+		description: "Domohorn Wrinkle を提供している 再春館製薬所 様の海外向けECサイトのブランディング・ECサイトデザイン(リニューアル)を担当いたしました。ブランディングに関するワークショップを行なった後、複数回コンセプトの構成・ディスカッションを行い、海外向けブランドコンセプト、ブランドアーキタイプ、ムードボード、カラー、タイポグラフィ、展開イメージ等を作成いたしました。グローバルでのブランドイメージがをこれから確立させていくため、新規ターゲットへ向けた日本の高品質なプロダクト / 上品で芯があるビジュアルを作り込みました。",
+		image: "/work/work - 5.jpg"
 	},
 	{
-		title: "Work 6",
-		area: "350㎡ / 105T",
-		completion: "2022",
-		description: "ブランディング・採用 コミュニケーション",
-		image: "/work/work - 6.jpg",
-		category: "PROJECT",
-		solution: "SOLUTION",
-		service: "Data Analytics"
+		title: "DAOXブランディング",
+		client: "Gaiax",
+		area: "Branding",
+		lead: "新規事業のブランド作り、アートディレクション",
+		description: "DAO型の組織運営方法（トークンコミュニティ・合同会社・株式会社）を用い、新たな「新規事業開発・不動産所有・地方創生」スキームの確立を目指すプラットフォーム「DAOX」の、サービス設計・プロダクトマネジメント(チームリード)を行っております。資金調達と労働者を初期フェーズから集めることができ、DAO的なガバナンスを用いることで、ローリスクで事業を始めることができることを強みとしたサービスを開発しており、ファンディング募集と、ガバナンスを実現するトークン・株管理や投票・決議ができる機能、バックオフィスサポートなどが可能となります。これによって、誰もが簡単に事業をはじめられ、できなかったことができるようになる社会が訪れることを期待しております。",
+		image: "/work/work - 6.jpg"
 	}
 ];
 
-// 各用途に合わせてデータを抽出
-const works = worksData.map(({ title, area, completion, description, image }) => ({
+// 一覧表示用のデータ（詳細リード文と詳細本文は除外）
+const works = worksData.map(({ title, client, area, image }) => ({
 	title,
+	client,
 	area,
-	completion,
-	description,
 	image
 }));
 
@@ -85,8 +72,8 @@ const works = worksData.map(({ title, area, completion, description, image }) =>
 	<Header />
 	<main>
 		<section class="hero-video">
-			<video class="hero-video-element" autoplay muted loop playsinline>
-				<source src="/FV.mp4" type="video/mp4" poster="/poster.jpg"/>
+			<video class="hero-video-element" autoplay muted loop playsinline poster="/poster.jpg">
+				<source src="/FV.mp4" type="video/mp4" />
 			</video>
 			<div class="video-overlay"></div>
 			<div class="hero-content">
@@ -167,11 +154,9 @@ const works = worksData.map(({ title, area, completion, description, image }) =>
 							<div class="work-info">
 								<h3 class="work-title">{work.title}</h3>
 								<div class="work-meta">
-									<span class="work-area">Area {work.area}</span>
-									<span class="work-separator">/</span>
-									<span class="work-completion">Completion {work.completion}</span>
+									<span class="work-client">{work.client}</span>
+									<span class="work-area">{work.area}</span>
 								</div>
-								<p class="work-description">{work.description}</p>
 							</div>
 						</article>
 					))}

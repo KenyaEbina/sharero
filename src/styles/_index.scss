@@ -594,29 +594,17 @@ main {
 
 .work-meta {
   display: flex;
-  align-items: center;
-  gap: $spacing-xs;
+  flex-direction: column;
+  gap: 4px;
   font-family: "Noto Sans JP", sans-serif;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.work-area,
-.work-completion {
+.work-client,
+.work-area {
   font-weight: 400;
-}
-
-.work-separator {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.work-description {
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
-  margin: 0;
+  line-height: 1.5;
 }
 
 @media (max-width: $breakpoint-mobile) {
@@ -748,11 +736,6 @@ main {
 
     .work-meta {
       font-size: 0.75rem;
-    }
-
-    .work-description {
-      font-size: 0.75rem;
-      line-height: 1.6;
     }
   }
 }
@@ -1044,13 +1027,27 @@ main {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.work-modal-area,
-.work-modal-completion {
+.work-modal-client,
+.work-modal-area {
   font-weight: 400;
 }
 
 .work-modal-separator {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.work-modal-lead {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.work-modal-lead-text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  margin: 0;
 }
 
 .work-modal-description {
@@ -1095,6 +1092,10 @@ main {
 
   .work-modal-meta {
     font-size: 0.813rem;
+  }
+
+  .work-modal-lead-text {
+    font-size: 1rem;
   }
 
   .work-modal-text {

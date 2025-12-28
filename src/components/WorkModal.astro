@@ -18,6 +18,9 @@
 					<!-- メタ情報はJavaScriptで動的に設定 -->
 				</div>
 			</div>
+			<div class="work-modal-lead">
+				<p class="work-modal-lead-text" id="work-modal-lead"></p>
+			</div>
 			<div class="work-modal-description">
 				<p class="work-modal-text" id="work-modal-description"></p>
 			</div>
@@ -31,9 +34,10 @@
 	const modalImageContainer = document.getElementById('work-modal-image');
 	const modalTitle = document.getElementById('work-modal-title');
 	const modalMeta = document.getElementById('work-modal-meta');
+	const modalLead = document.getElementById('work-modal-lead');
 	const modalDescription = document.getElementById('work-modal-description');
 
-	function openWorkModal(work) {
+	function openWorkModal(work: any) {
 		if (!modal || !work) return;
 
 		// モーダルにデータを設定
@@ -45,12 +49,15 @@
 		}
 		if (modalMeta) {
 			modalMeta.innerHTML = `
-				<span class="work-modal-area">Area ${work.area}</span>
+				<span class="work-modal-client">${work.client}</span>
 				<span class="work-modal-separator">/</span>
-				<span class="work-modal-completion">Completion ${work.completion}</span>
+				<span class="work-modal-area">${work.area}</span>
 			`;
 		}
-		if (modalDescription) {
+		if (modalLead && work.lead) {
+			modalLead.textContent = work.lead;
+		}
+		if (modalDescription && work.description) {
 			modalDescription.textContent = work.description;
 		}
 
@@ -81,5 +88,5 @@
 	}
 
 	// グローバル関数として公開
-	window.openWorkModal = openWorkModal;
+	(window as any).openWorkModal = openWorkModal;
 </script>

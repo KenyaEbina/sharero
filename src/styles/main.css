@@ -491,6 +491,9 @@ main {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
+.hero-video .hero-video-sp {
+  display: none;
+}
 .hero-video .video-overlay {
   position: absolute;
   top: 0;
@@ -997,35 +1000,29 @@ main {
 
 .work-meta {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 4px;
   font-family: "Noto Sans JP", sans-serif;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.work-area,
-.work-completion {
+.work-client,
+.work-area {
   font-weight: 400;
-}
-
-.work-separator {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.work-description {
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
-  margin: 0;
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
   .hero-video {
     height: 100vh;
     padding-top: 60px;
+  }
+  .hero-video .hero-video-pc {
+    display: none;
+  }
+  .hero-video .hero-video-sp {
+    display: block;
   }
   .hero-video .hero-content {
     padding: 0 24px;
@@ -1104,7 +1101,7 @@ main {
     padding: 2rem 0px;
   }
   .works-section .container {
-    padding: 2rem 0px;
+    padding: 2rem 24px;
   }
   .works-section .works-header {
     margin-bottom: 2rem;
@@ -1125,10 +1122,6 @@ main {
   }
   .works-section .work-meta {
     font-size: 0.75rem;
-  }
-  .works-section .work-description {
-    font-size: 0.75rem;
-    line-height: 1.6;
   }
 }
 .modal-overlay {
@@ -1397,13 +1390,27 @@ main {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.work-modal-area,
-.work-modal-completion {
+.work-modal-client,
+.work-modal-area {
   font-weight: 400;
 }
 
 .work-modal-separator {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.work-modal-lead {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.work-modal-lead-text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  margin: 0;
 }
 
 .work-modal-description {
@@ -1442,6 +1449,9 @@ main {
   }
   .work-modal-meta {
     font-size: 0.813rem;
+  }
+  .work-modal-lead-text {
+    font-size: 1rem;
   }
   .work-modal-text {
     font-size: 0.875rem;

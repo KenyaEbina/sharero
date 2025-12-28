@@ -1,33 +1,12 @@
 ---
-interface Props {
-	sliderProjects: Array<{
-		category: string;
-		title: string;
-		solution: string;
-		service: string;
-	}>;
-}
-
-const { sliderProjects } = Astro.props;
 ---
-
-<script define:vars={{ sliderProjects }}>
-	window.sliderProjects = sliderProjects;
-</script>
 
 <script>
 	import gsap from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
-	import { CustomEase } from 'gsap/all';
-	import Swiper from 'swiper';
-	import { Autoplay, EffectFade } from 'swiper/modules';
-	import 'swiper/css';
-	import 'swiper/css/effect-fade';
 
 	document.addEventListener('DOMContentLoaded', () => {
-		const sliderProjects = window.sliderProjects || [];
-		gsap.registerPlugin(CustomEase, SplitText);
-		CustomEase.create('hop', '0.9, 0, 0.1, 1');
+		gsap.registerPlugin(SplitText);
 
 		const splitText = (selector, type, className) => {
 			return SplitText.create(selector, {
@@ -37,287 +16,68 @@ const { sliderProjects } = Astro.props;
 			});
 		};
 
-		const counterProgress = document.querySelector('.preloader-counter h1');
-		const counterContainer = document.querySelector('.preloader-counter');
-		const progressBar = document.querySelector('.preloader-progress-bar');
-		const progress = document.querySelector('.preloader-progress');
-		const heroSlider = document.querySelector('.hero-slider');
-		const projectTitle = document.getElementById('project-title');
-		const solutionTitle = document.getElementById('solution-title');
+		const headline = document.querySelector('.hero-headline');
+		const description = document.querySelector('.hero-description');
 		const copyrightYear = document.querySelector('.copyright-year');
 		const scrollIndicator = document.querySelector('.scroll-indicator');
-
-
-		if (!counterProgress || !counterContainer) return;
-
-		// ローディング中はbodyにloadingクラスを追加
-		document.body.classList.add('loading');
-
-		const counter = { value: 0 };
-		const tl = gsap.timeline();
-
-		// カウンターアニメーション
-		tl.to(counter, {
-			value: 100,
-			duration: 3,
-			ease: 'power3.out',
-			onUpdate: () => {
-				counterProgress.textContent = Math.floor(counter.value);
-			},
-			onComplete: () => {
-				const counterSplit = splitText(counterProgress, 'chars', 'digit');
-				gsap.to(counterSplit.chars, {
-					x: '-100%',
-					duration: 0.75,
-					ease: 'power3.out',
-					stagger: 0.1,
-					delay: 1,
-					onComplete: () => {
-						counterContainer.remove();
-					},
-				});
-			},
-		});
-
-		// カウンターのスケール
-		tl.to(
-			counterContainer,
-			{
-				scale: 1,
-				duration: 3,
-				ease: 'power3.out',
-			},
-			'<'
-		);
-
-		// プログレスバーのアニメーション
-		if (progressBar) {
-			tl.to(
-				progressBar,
-				{
-					scaleX: 1,
-					duration: 3,
-					ease: 'power3.out',
-				},
-				'<'
-			);
-		}
-
-		// Swiperの初期化（ローディング完了後に実行）
-		let swiper;
-
-		// プログレスバーの内部プログレス
-		if (progress) {
-			tl.to(
-				progress,
-				{
-					scaleX: 1,
-					duration: 2,
-					ease: 'hop',
-				},
-				6
-			);
-		}
+		const heroButton = document.querySelector('.hero-button');
 
 		// テキストアニメーション
-		if (projectTitle) {
-			const projectSplit = splitText(projectTitle, 'chars', 'char');
-			gsap.set(projectSplit.chars, { x: '100%' });
-			tl.to(
-				projectSplit.chars,
-				{
-					x: '0%',
-					duration: 1,
-					ease: 'power4.out',
-					stagger: 0.075,
-				},
-				7
-			);
+		if (headline) {
+			const headlineSplit = splitText(headline, 'words', 'word');
+			gsap.set(headlineSplit.words, { y: '100%' });
+			gsap.to(headlineSplit.words, {
+				y: '0%',
+				duration: 1,
+				ease: 'power4.out',
+				stagger: 0.1,
+			});
 		}
 
-		if (solutionTitle) {
-			const solutionSplit = splitText(solutionTitle, 'chars', 'char');
-			gsap.set(solutionSplit.chars, { x: '100%' });
-			tl.to(
-				solutionSplit.chars,
-				{
-					x: '0%',
-					duration: 1,
-					ease: 'power4.out',
-					stagger: 0.075,
-				},
-				7.5
-			);
+		if (description) {
+			gsap.set(description, { opacity: 0, y: 20 });
+			gsap.to(description, {
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				ease: 'power3.out',
+				delay: 0.3,
+			});
+		}
+
+		if (heroButton) {
+			gsap.set(heroButton, { opacity: 0, y: 20 });
+			gsap.to(heroButton, {
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				ease: 'power3.out',
+				delay: 0.6,
+			});
 		}
 
 		if (copyrightYear) {
 			const copyrightSplit = splitText(copyrightYear, 'chars', 'char');
 			gsap.set(copyrightSplit.chars, { y: '100%' });
-			tl.to(
-				copyrightSplit.chars,
-				{
-					y: '0%',
-					duration: 1,
-					ease: 'power4.out',
-					stagger: 0.075,
-				},
-				7.5
-			);
+			gsap.to(copyrightSplit.chars, {
+				y: '0%',
+				duration: 1,
+				ease: 'power4.out',
+				stagger: 0.075,
+				delay: 0.5,
+			});
 		}
 
 		if (scrollIndicator) {
 			const scrollSplit = splitText(scrollIndicator, 'words', 'word');
 			gsap.set(scrollSplit.words, { y: '100%' });
-			tl.to(
-				scrollSplit.words,
-				{
-					y: '0%',
-					duration: 1,
-					ease: 'power4.out',
-					stagger: 0.075,
-				},
-				7.5
-			);
-		}
-
-		// スライドプログレスバー
-		const slideProgressBar = document.querySelector('.slide-progress-bar');
-		const slideProgress = document.querySelector('.slide-progress');
-		let progressAnimation;
-
-		// プログレスバーのアニメーション管理
-		function startProgressBar() {
-			if (slideProgress) {
-				gsap.set(slideProgress, { scaleX: 0 });
-				if (progressAnimation) {
-					progressAnimation.kill();
-				}
-				progressAnimation = gsap.to(slideProgress, {
-					scaleX: 1,
-					duration: 3,
-					ease: 'none',
-					onComplete: () => {
-						startProgressBar(); // ループ
-					},
-				});
-			}
-		}
-
-		function stopProgressBar() {
-			if (progressAnimation) {
-				progressAnimation.pause();
-			}
-		}
-
-		function resumeProgressBar() {
-			if (progressAnimation) {
-				progressAnimation.resume();
-			} else {
-				startProgressBar();
-			}
-		}
-
-		// ローディング完了後にclip-pathを解除して全体を表示
-		// テキストアニメーション完了後（7.5秒後）に解除
-		tl.to(
-			'main, header, footer',
-			{
-				clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+			gsap.to(scrollSplit.words, {
+				y: '0%',
 				duration: 1,
-				ease: 'power2.out',
-				onComplete: () => {
-					document.body.classList.remove('loading');
-				},
-			},
-			7.5
-		);
-
-		// プログレスバーを最後に消す（テキストアニメーション完了後）
-		if (progressBar) {
-			tl.to(
-				progressBar,
-				{
-					opacity: 0,
-					duration: 0.5,
-					ease: 'power2.out',
-					onComplete: () => {
-						if (progressBar) {
-							progressBar.remove();
-						}
-					},
-				},
-				8.5
-			);
+				ease: 'power4.out',
+				stagger: 0.075,
+				delay: 0.5,
+			});
 		}
-
-		// ローディング完了後にSwiperを初期化して開始
-		tl.call(
-			() => {
-				// Swiperの初期化
-				swiper = new Swiper('.hero-swiper', {
-					modules: [Autoplay, EffectFade],
-					loop: true,
-					autoplay: {
-						delay: 3000,
-						disableOnInteraction: false,
-					},
-					effect: 'fade',
-					fadeEffect: {
-						crossFade: true,
-					},
-					speed: 1000,
-					allowTouchMove: false,
-				});
-
-				// スライド変更時のイベント
-				swiper.on('slideChange', function () {
-					const currentIndex = swiper.realIndex;
-					if (projectTitle && solutionTitle && sliderProjects[currentIndex]) {
-						projectTitle.textContent = sliderProjects[currentIndex].title;
-						solutionTitle.textContent = sliderProjects[currentIndex].service;
-
-						// テキストを再分割してアニメーション
-						const projectSplit = splitText(projectTitle, 'chars', 'char');
-						const solutionSplit = splitText(solutionTitle, 'chars', 'char');
-
-						gsap.set(projectSplit.chars, { x: '100%' });
-						gsap.to(projectSplit.chars, {
-							x: '0%',
-							duration: 0.8,
-							ease: 'power4.out',
-							stagger: 0.05,
-						});
-
-						gsap.set(solutionSplit.chars, { x: '100%' });
-						gsap.to(solutionSplit.chars, {
-							x: '0%',
-							duration: 0.8,
-							ease: 'power4.out',
-							stagger: 0.05,
-						});
-					}
-
-					// プログレスバーをリセット
-					startProgressBar();
-				});
-
-				// プログレスバーを開始
-				startProgressBar();
-
-				// ホバー時の動作
-				if (heroSlider) {
-					heroSlider.addEventListener('mouseenter', () => {
-						swiper.autoplay.stop();
-						stopProgressBar();
-					});
-					heroSlider.addEventListener('mouseleave', () => {
-						swiper.autoplay.start();
-						startProgressBar();
-					});
-				}
-			},
-			null,
-			8
-		);
 	});
 </script>

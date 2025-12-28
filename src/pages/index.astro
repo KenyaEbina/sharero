@@ -2,136 +2,105 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import Preloader from "../components/Preloader.astro";
 import RevealAnimation from "../components/RevealAnimation.astro";
 import RepresentativeModal from "../components/RepresentativeModal.astro";
 import WorkModal from "../components/WorkModal.astro";
 
-const works = [
+// Workデータを一箇所にまとめて管理
+const worksData = [
 	{
 		title: "Work 1",
 		area: "661㎡ / 200T",
 		completion: "2024",
 		description: "生産性を高める コミュニケーション 共創・協働の場",
-		image: "/work/work - 1.jpg"
+		image: "/work/work - 1.jpg",
+		category: "PROJECT",
+		solution: "SOLUTION",
+		service: "Web Development"
 	},
 	{
 		title: "Work 2",
 		area: "1090㎡ / 330T",
 		completion: "2024",
 		description: "ブランディング・採用 共創・協働の場",
-		image: "/work/work - 2.jpg"
+		image: "/work/work - 2.jpg",
+		category: "PROJECT",
+		solution: "SOLUTION",
+		service: "Mobile App"
 	},
 	{
 		title: "Work 3",
 		area: "429㎡ / 130T",
 		completion: "2024",
 		description: "ブランディング・採用 コミュニケーション 共創・協働の場",
-		image: "/work/work - 3.jpg"
+		image: "/work/work - 3.jpg",
+		category: "PROJECT",
+		solution: "SOLUTION",
+		service: "Cloud Consulting"
 	},
 	{
 		title: "Work 4",
 		area: "500㎡ / 150T",
 		completion: "2023",
 		description: "コミュニケーション 共創・協働の場",
-		image: "/work/work - 4.jpg"
+		image: "/work/work - 4.jpg",
+		category: "PROJECT",
+		solution: "SOLUTION",
+		service: "UI/UX Design"
 	},
 	{
 		title: "Work 5",
 		area: "800㎡ / 240T",
 		completion: "2023",
 		description: "生産性を高める 共創・協働の場",
-		image: "/work/work - 5.jpg"
+		image: "/work/work - 5.jpg",
+		category: "PROJECT",
+		solution: "SOLUTION",
+		service: "AI Solutions"
 	},
 	{
 		title: "Work 6",
 		area: "350㎡ / 105T",
 		completion: "2022",
 		description: "ブランディング・採用 コミュニケーション",
-		image: "/work/work - 6.jpg"
-	}
-];
-
-const sliderImages = [
-	"/work/work - 1.jpg",
-	"/work/work - 2.jpg",
-	"/work/work - 3.jpg",
-	"/work/work - 4.jpg",
-	"/work/work - 5.jpg",
-	"/work/work - 6.jpg"
-];
-
-const sliderProjects = [
-	{
+		image: "/work/work - 6.jpg",
 		category: "PROJECT",
-		title: "Work 1",
-		solution: "SOLUTION",
-		service: "Web Development"
-	},
-	{
-		category: "PROJECT",
-		title: "Work 2",
-		solution: "SOLUTION",
-		service: "Mobile App"
-	},
-	{
-		category: "PROJECT",
-		title: "Work 3",
-		solution: "SOLUTION",
-		service: "Cloud Consulting"
-	},
-	{
-		category: "PROJECT",
-		title: "Work 4",
-		solution: "SOLUTION",
-		service: "UI/UX Design"
-	},
-	{
-		category: "PROJECT",
-		title: "Work 5",
-		solution: "SOLUTION",
-		service: "AI Solutions"
-	},
-	{
-		category: "PROJECT",
-		title: "Work 6",
 		solution: "SOLUTION",
 		service: "Data Analytics"
 	}
 ];
+
+// 各用途に合わせてデータを抽出
+const works = worksData.map(({ title, area, completion, description, image }) => ({
+	title,
+	area,
+	completion,
+	description,
+	image
+}));
+
 ---
 
 <BaseLayout title="Sharero | コーポレートサイト" description="モダンなコーポレートサイト">
-	<Preloader />
 	<Header />
 	<main>
-		<section class="hero-slider">
-			<div class="swiper hero-swiper">
-				<div class="swiper-wrapper">
-					{sliderImages.map((image, index) => (
-						<div class="swiper-slide">
-							<div class="slide-background" style={`background-image: url('${image}');`}></div>
-							<div class="slide-overlay"></div>
-						</div>
-					))}
-				</div>
-			</div>
+		<section class="hero-video">
+			<video class="hero-video-element" autoplay muted loop playsinline>
+				<source src="/FV.mp4" type="video/mp4" />
+			</video>
+			<div class="video-overlay"></div>
 			<div class="hero-content">
 				<div class="hero-left">
-					<div class="project-info">
-						<div class="project-label">PROJECT</div>
-						<div class="project-title" id="project-title">{sliderProjects[0].title}</div>
-						<div class="solution-label">SOLUTION</div>
-						<div class="solution-title" id="solution-title">{sliderProjects[0].service}</div>
+					<div class="hero-text">
+						<h1 class="hero-headline">Innovation Through Collaboration</h1>
+						<p class="hero-description">Creating meaningful digital experiences that connect people and businesses</p>
+						<a href="#achievements" class="hero-button">View All Work</a>
 					</div>
 				</div>
 			</div>
 			<div class="hero-footer">
 				<div class="copyright-year">©2025</div>
 				<div class="scroll-indicator">SCROLL</div>
-			</div>
-			<div class="slide-progress-bar">
-				<div class="slide-progress"></div>
 			</div>
 		</section>
 
@@ -213,13 +182,12 @@ const sliderProjects = [
 	<Footer />
 	<RepresentativeModal />
 	<WorkModal />
-	<RevealAnimation sliderProjects={sliderProjects} />
+	<RevealAnimation />
 
-	<script define:vars={{ works }}>
+	<script define:vars={{ worksData }}>
 		// Workカードのクリックイベントを設定
 		document.addEventListener('DOMContentLoaded', () => {
 			const workCards = document.querySelectorAll('.work-card');
-			const worksData = works;
 
 			workCards.forEach((card, index) => {
 				card.addEventListener('click', () => {
